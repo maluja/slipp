@@ -20,16 +20,15 @@
 
 <!-- ### Mybatis 설정파일 불러오기 -->
 	
-	
-	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<!-- ### ViewResolver구요~ jsp와 name을 매핑시켜주는 곳 -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		
 	</beans:bean>
 	
-	<!--  com.spring.web 하위 모든 패키지에 있는 파일의 어노테이션을 스캔해서 빈으로 등록
+	<!-- ### com.spring.web 하위 모든 패키지에 있는 파일의 어노테이션을 스캔해서 빈으로 등록
     하겠다 의미 -->
 	<context:component-scan base-package="net.slipp.web" />
 	

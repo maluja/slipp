@@ -13,7 +13,7 @@
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<!-- ### 모든 서블릿들과 filter들에 의해 공유되는 bean생성 -->
-	<!-- servlet이 여러개인 경우 DispatcherServlet 은 각가 별도의 webapplicationcontext 를 
+	<!-- ### servlet이 여러개인 경우 DispatcherServlet 은 각가 별도의 webapplicationcontext 를 
 		생성한다. 두 context는 독립적이므로 설정파일에서 생성한 bean을 서로 사용할 수 없다 이것을 사용하게 해주는게 ContextLoaderListener 
 		이다 ContextLoaderListener 와 DispatcherServlet 은 각각 webapplicationcontext 를 
 		생성하는데 ContextLoaderListener 가 생성한 컨텍스트가 root 컨텍스트가 되고 DispatcherServlet 생성한 
@@ -24,7 +24,7 @@
 	</listener>
 
 	<!-- Processes application requests -->
-	<!-- 기본 servlet 설정 -->
+	<!-- ### 기본 servlet 설정 -->
 	<servlet>
 		<servlet-name>appServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -32,7 +32,7 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
 				/WEB-INF/spring/appServlet/servlet-context.xml
-				<!-- 설정파일 여러게 사용가능함... 아래에 계속 추가가능  -->
+				<!-- ### 설정파일 여러게 사용가능함... 아래에 계속 추가가능  -->
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>  <!-- ### 로딩하는 순서 servlet가 여러개 인경우 순서정의 -->
@@ -52,13 +52,13 @@
 		<filter-name>characterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
 		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>utf-8</param-value>  <!-- 입력값 없으면 아무것도 하지않는다  -->
+			<param-name>encoding</param-name> <!--### 요청에 대한 encoding   -->
+			<param-value>utf-8</param-value>  <!--### 입력값 없으면 아무것도 하지않는다  -->
 		</init-param>
 		
-		<!-- ### forceEncoding=true  : HttpServletRqquest,HttpServletResponse
+		<!-- ### forceEncoding=true  : HttpServletRequest,HttpServletResponse
 									    둘다 입력된 encodiong값을 강제 셋팅해준다
-			     forceEncoding=false : HttpServletRqquest=null 이면 
+			     forceEncoding=false : HttpServletRequest=null 이면 
 			     					   HttpServletResponse값으로 setting
 		 -->
 		<init-param>
@@ -68,7 +68,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>characterEncodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>   <!-- 루트하위 모든 요청에 대한 인코딩 처리를 하겠다는 의미 -->
+		<url-pattern>/*</url-pattern>   <!-- ### 루트하위 모든 요청에 대한 인코딩 처리를 하겠다는 의미 -->
 	</filter-mapping>
 
     <!-- ### 에러페이지 설정 -->

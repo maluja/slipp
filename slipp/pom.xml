@@ -14,8 +14,6 @@
 		</parent> <groupId>net.javajigi</groupId> <artifactId>wiki-web-parent</artifactId> 
 		<version>1.0-SNAPSHOT</version> -->
 
-
-
 	<!--### 설정파일에서 발생하는 중복 설정을 제거하기 위하여 정의 -->
 	<properties>
 		<java-version>1.7</java-version>
@@ -179,7 +177,7 @@
 					<additionalBuildcommands>
 						<buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
 					</additionalBuildcommands>
-					<downloadSources>true</downloadSources>
+					<downloadSources>true</downloadSources>  <!-- ### 소스코드 볼수있도록 다운한다 -->
 					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
 			</plugin>
