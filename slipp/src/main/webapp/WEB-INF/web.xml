@@ -3,31 +3,78 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<!-- The definition of the Root Spring Container shared by all Servlets 
+		and Filters -->
+	<!-- ### 루트 컨텍스트로 모든 서블릿과 필터들이 공유 합니다  공유할 부분을 설정하는 부분입니다 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
 	</context-param>
-	
+
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<!-- ### 모든 서블릿들과 filter들에 의해 공유되는 bean생성 -->
+	<!-- servlet이 여러개인 경우 DispatcherServlet 은 각가 별도의 webapplicationcontext 를 
+		생성한다. 두 context는 독립적이므로 설정파일에서 생성한 bean을 서로 사용할 수 없다 이것을 사용하게 해주는게 ContextLoaderListener 
+		이다 ContextLoaderListener 와 DispatcherServlet 은 각각 webapplicationcontext 를 
+		생성하는데 ContextLoaderListener 가 생성한 컨텍스트가 root 컨텍스트가 되고 DispatcherServlet 생성한 
+		인스턴스는 root 컨텍스트를 부모로 하는 자식 컨텍스트가 된다. <<공통빈(위존성)이 필요한 경우 >> -->
+
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
 	<!-- Processes application requests -->
+	<!-- 기본 servlet 설정 -->
 	<servlet>
 		<servlet-name>appServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+			<param-value>
+				/WEB-INF/spring/appServlet/servlet-context.xml
+				<!-- 설정파일 여러게 사용가능함... 아래에 계속 추가가능  -->
+			</param-value>
 		</init-param>
-		<load-on-startup>1</load-on-startup>
+		<load-on-startup>1</load-on-startup>  <!-- ### 로딩하는 순서 servlet가 여러개 인경우 순서정의 -->
 	</servlet>
-		
+
+
+	<!-- ### 요청을 처리할 서블릿 객체 연결 -->
+	<!-- ### url-pattern에 정의된 url이 넘어오면 연결 *.do 이런식으로 -->
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
+		<!-- utl-pattern 특정 url지정시 "/"를 변경하시면 됩니다 ex) *.do -->
 	</servlet-mapping>
 
+	<!-- ### 필터 설정 -->
+	<filter>
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>  <!-- 입력값 없으면 아무것도 하지않는다  -->
+		</init-param>
+		
+		<!-- ### forceEncoding=true  : HttpServletRqquest,HttpServletResponse
+									    둘다 입력된 encodiong값을 강제 셋팅해준다
+			     forceEncoding=false : HttpServletRqquest=null 이면 
+			     					   HttpServletResponse값으로 setting
+		 -->
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>   <!-- 루트하위 모든 요청에 대한 인코딩 처리를 하겠다는 의미 -->
+	</filter-mapping>
+
+    <!-- ### 에러페이지 설정 -->
+    <error-page>
+    	<error-code></error-code>
+    	<location>/WEB-INF/view/error/error.jsp</location>
+    </error-page>
+    
 </web-app>

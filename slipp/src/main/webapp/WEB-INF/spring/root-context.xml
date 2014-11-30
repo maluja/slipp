@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	<!-- ### Root Context 설정하는 곳으로, 공유할 부분을 설정하는 부분입니다 -->
+	<!-- common dbcp : 컨넥션 풀 사용(common-dbcp pom.xml에 deendencies추가 -->
+	<bean id="dataSource"
+		  class="org.apache.commons.dbcp.BasicDataSource"
+		  <property name="driverClassName" value="${jdbc.driverClassName"></property>
+		  <property name="url" value="${jdbc.url"></property>
+		  <property name="username" value="${jdbc.usernamer"></property>
+		  <property name="password" value="${jdbc.password"></property>
+	</bean>
+	
+	<!-- mybatis -->
+	  
+	<!-- SqlMapClienTemplate -->
+	
+	
+	</bean>
+	<!-- ### 데이터베이스 값이 기술되어있는 .properties 파일의 위치를 설정해줍니다-->
+	<context:property-placeholder location="classpath:jdbc.properties"/>	
+	
 </beans>
