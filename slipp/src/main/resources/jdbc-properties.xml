@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+	<comment>jdbc-properties</comment>
+
+	<!-- DataBase -->
+	<entry key="database.dirverClassName">oracle.jdbc.driver.OracleDriver</entry>
+	<entry key="database.url">jdbc:oracle:thin:@localhost:1521:orcl</entry>
+	<entry key="database.username">user2</entry>
+	<entry key="database.password">1234</entry>
+
+</properties>

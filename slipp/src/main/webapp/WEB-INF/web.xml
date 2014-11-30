@@ -6,6 +6,7 @@
 	<!-- The definition of the Root Spring Container shared by all Servlets 
 		and Filters -->
 	<!-- ### 루트 컨텍스트로 모든 서블릿과 필터들이 공유 합니다  공유할 부분을 설정하는 부분입니다 -->
+	<!-- ### Server 가 기동할때 초기화작업 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
